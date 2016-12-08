@@ -50,4 +50,19 @@ describe("Thermostat", function() {
     thermostat.resetTemperature()
     expect(thermostat.temperature).toEqual(DEFAULT_TEMPERATURE)
   });
+
+  it("Should return low-usage if below 18°C when current energy usage is checked", function () {
+    thermostat.temperature = 17
+    expect(thermostat.energyUsage()).toEqual("low-usage")
+  });
+
+  it("Should return medium-usage if below 25°C when current energy usage is checked", function () {
+    thermostat.temperature = 19
+    expect(thermostat.energyUsage()).toEqual("medium-usage")
+  });
+
+  it("Should return high-usage if 25°C or higher when current energy usage is checked", function () {
+    thermostat.temperature = 25
+    expect(thermostat.energyUsage()).toEqual("high-usage")
+  });
 });
